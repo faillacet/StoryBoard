@@ -37,8 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Screens.cs" />
+     <Compile Include="Assets\Scripts\StoryData.cs" />
      <Compile Include="Assets\Scripts\StorySelector.cs" />
      <Compile Include="Assets\Scripts\Storybook.cs" />
+     <None Include="Assets\Resources\Text\StoryTexts.txt" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.9f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

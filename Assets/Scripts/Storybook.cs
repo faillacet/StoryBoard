@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Storybook : MonoBehaviour
 {
@@ -8,14 +9,15 @@ public class Storybook : MonoBehaviour
     public CanvasGroup NextButtonCanvasGroup;
     public List<CanvasGroup> PageCanvasGroup;
 
+    public List<Text> Texts;
+    public List<Image> Images;
+
     protected int totalPages;
     protected int currentPage;
 
-    void Start() {
+    public virtual void Start() {
         totalPages = PageCanvasGroup.Count;
-        currentPage = 1;
-        UpdatePages();
-        UpdateButtons();
+        GoToPageOne();
     }
 
     public void OnPreviousButtonClick() {
@@ -23,16 +25,14 @@ public class Storybook : MonoBehaviour
         if (currentPage < 1) {
             currentPage = 1;
         }  
-        UpdatePages();
-        UpdateButtons();
+        GoToPage(currentPage);
     }
 
     public void OnNextButtonClick() {
         currentPage = currentPage + 1;
         if (currentPage > totalPages)
             currentPage = totalPages;
-        UpdatePages();
-        UpdateButtons();
+        GoToPage(currentPage);
     }
 
     public void UpdatePages() {
@@ -51,6 +51,28 @@ public class Storybook : MonoBehaviour
         if (currentPage == totalPages) {
             Hide(NextButtonCanvasGroup);
         }
+    }
+
+    public void SetImage(int pageNumber, string imageName) {
+        Images[pageNumber-1].sprite = GetSprite(imageName);
+    }
+
+    public void SetText(int pageNumber, string inputText) {
+        Texts[pageNumber-1].text = inputText;
+    }
+
+    public void GoToPageOne() {
+        GoToPage(1);
+    }
+
+    private void GoToPage(int pageNumber) {
+        currentPage = pageNumber;
+        UpdatePages();
+        UpdateButtons();
+    }
+
+    private Sprite GetSprite(string imageName) {
+        return Resources.Load<Sprite>("Art/" + imageName);
     }
 
     protected void Show(CanvasGroup canvasGroup) {
